@@ -4,12 +4,12 @@ public class main {
 
         Echequier test = new Echequier(8);
 
-        test.toString();
+        System.out.println(test);
 
         test.placerReine(1,1);
 
         System.out.println("Placement reine\n");
 
-        test.toString();
+        System.out.println(test);
     }
 }

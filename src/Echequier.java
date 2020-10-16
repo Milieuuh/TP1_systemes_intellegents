@@ -62,7 +62,7 @@ public class Echequier {
         {
             for (int col = 0; col < taille; col++)
             {
-                s+= echequier[ligne][col].getTypeOccupation()+" ";
+                s+= this.echequier[ligne][col].getTypeOccupation()+" ";
             }
             s+="\n";
         }
