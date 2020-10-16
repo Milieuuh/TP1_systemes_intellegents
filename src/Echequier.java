@@ -38,6 +38,7 @@ public class Echequier {
             //case occupée par la reine
             echequier[x][y].setTypeOccupation(1);
 
+            int nb=1;
             //MAj Menaces
             for(int ligne=0;ligne<taille;ligne++)
             {
@@ -48,9 +49,24 @@ public class Echequier {
                     {
                         echequier[ligne][col].setTypeOccupation(2);
                     }
-                }
 
+                    if(nb<=7)
+                    {
+                        if((x==0 && y==0) &&(echequier[x+nb][y+nb].getTypeOccupation()==0))
+                        {
+                            echequier[x+nb][y+nb].setTypeOccupation(2);
+                            nb++;
+                        }
+                    }
+
+                }
             }
+
+
+
+
+
+
         }
     }
 
