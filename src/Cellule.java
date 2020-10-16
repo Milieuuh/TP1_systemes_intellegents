@@ -16,6 +16,7 @@ public class Cellule {
     {
         this.x = x;
         this.y = y;
+        this.typeOccupation = LIBRE;  
     }
 
 
