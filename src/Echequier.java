@@ -30,4 +30,43 @@ public class Echequier {
         echequier[x][y].setTypeOccupation(valeur);
     }
 
+    public void placerReine(int x, int y)
+    {
+        //si case libre
+        if((echequier[x][y].getTypeOccupation()==0))
+        {
+            //case occupée par la reine
+            echequier[x][y].setTypeOccupation(1);
+
+            //MAj Menaces
+            for(int ligne=0;ligne<taille;ligne++)
+            {
+                for(int col=0;col<taille;col++)
+                {
+                    if(((ligne==x)&&(echequier[x][y].getTypeOccupation()==0))
+                            ||((col==y)&&(echequier[x][y].getTypeOccupation()==0)))
+                    {
+                        echequier[x][y].setTypeOccupation(2);
+                    }
+                }
+
+            }
+        }
+    }
+
+    public String toString()
+    {
+        String s="";
+
+        for(int ligne=0;ligne<taille;ligne++)
+        {
+            for (int col = 0; col < taille; col++)
+            {
+                s+= echequier[ligne][col].getTypeOccupation()+" ";
+            }
+            s+="\n";
+        }
+
+        return s;
+    }
 }
