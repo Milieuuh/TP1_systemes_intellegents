@@ -6,7 +6,7 @@ public class main {
 
         System.out.println(test);
 
-        test.placerReine(0,0);
+        test.placerReine(4,2);
 
         System.out.println("Placement reine\n");
 
