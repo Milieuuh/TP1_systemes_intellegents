@@ -43,10 +43,10 @@ public class Echequier {
             {
                 for(int col=0;col<taille;col++)
                 {
-                    if(((ligne==x)&&(echequier[x][y].getTypeOccupation()==0))
-                            ||((col==y)&&(echequier[x][y].getTypeOccupation()==0)))
+                    if(((ligne==x)&&(echequier[ligne][col].getTypeOccupation()==0))
+                            ||((col==y)&&(echequier[ligne][col].getTypeOccupation()==0)))
                     {
-                        echequier[x][y].setTypeOccupation(2);
+                        echequier[ligne][col].setTypeOccupation(2);
                     }
                 }
 
