@@ -30,67 +30,47 @@ public class Echequier {
         echequier[x][y].setTypeOccupation(valeur);
     }
 
-    public void placerReine(int x, int y)
-    {
+    public void placerReine(int x, int y) {
         //si case libre
-        if((echequier[x][y].getTypeOccupation()==0))
-        {
+        if ((echequier[x][y].getTypeOccupation() == 0)) {
             //case occupée par la reine
             echequier[x][y].setTypeOccupation(1);
 
             //MAj Menaces
-            int nb=1;
-            int nbDiag2=1;
-            int nbDiag3=1;
-            for(int ligne=0;ligne<taille;ligne++)
-            {
-                for(int col=0;col<taille;col++)
-                {
+            int nb = 1;
+            int nbDiag2 = 1;
+            int nbDiag3 = 1;
+            for (int ligne = 0; ligne < taille; ligne++) {
+                for (int col = 0; col < taille; col++) {
                     //ligne colonnes
-                    if(((ligne==x)&&(echequier[ligne][col].getTypeOccupation()==0))
-                            ||((col==y)&&(echequier[ligne][col].getTypeOccupation()==0)))
-                    {
+                    if (((ligne == x) && (echequier[ligne][col].getTypeOccupation() == 0))
+                            || ((col == y) && (echequier[ligne][col].getTypeOccupation() == 0))) {
                         echequier[ligne][col].setTypeOccupation(2);
                     }
 
                     //diagonale droite bas
-                    if((ligne==x+nb && col==y+nb)&& echequier[ligne][col].getTypeOccupation()==0)
-                    {
+                    if ((ligne == x + nb && col == y + nb) && echequier[ligne][col].getTypeOccupation() == 0) {
                         echequier[ligne][col].setTypeOccupation(2);
                         nb++;
                     }
 
                     //diagonale gauche bas
-                    if((ligne==x+nbDiag2 && col==y-nbDiag2)&& echequier[ligne][col].getTypeOccupation()==0)
-                    {
+                    if ((ligne == x + nbDiag2 && col == y - nbDiag2) && echequier[ligne][col].getTypeOccupation() == 0) {
                         echequier[ligne][col].setTypeOccupation(2);
                         nbDiag2++;
                     }
 
-                    //diagonale droit haut
-                    if((ligne==x-nbDiag3 && col==y+nbDiag3)&& echequier[ligne][col].getTypeOccupation()==0)
-                    {
-                        echequier[ligne][col].setTypeOccupation(2);
-                        nbDiag3++;
-                    }
-
-
                 }
             }
 
-            nb=1;
-            nbDiag2=1;
-            if(x!=0 || y!=0)
-            {
+            nb = 1;
+            nbDiag2 = 1;
+            if (x != 0 || y != 0) {
 
-                for (int i=x; i>=0; i--)
-                {
-                    for(int j=y; j>=0; j--)
-                    {
+                for (int i = x; i >= 0; i--) {
+                    for (int j = y; j >= 0; j--) {
                         //diagonale gauche haut
-
-                        if((i==x-nb && j==y-nb)&& echequier[i][j].getTypeOccupation()==0)
-                        {
+                        if ((i == x - nb && j == y - nb) && echequier[i][j].getTypeOccupation() == 0) {
                             echequier[i][j].setTypeOccupation(2);
                             nb++;
                         }
@@ -99,6 +79,19 @@ public class Echequier {
                 }
 
             }
+
+            for (int col = 0; col < taille; col++) {
+                for (int ligne = taille; ligne >=0; ligne--) {
+                        int  newx=x - nbDiag2;
+                    //diagonale droit haut
+                        if ((ligne == x - nbDiag2 && col == y + nbDiag2) && echequier[ligne][col].getTypeOccupation() == 0)
+                        {
+                            echequier[ligne][col].setTypeOccupation(2);
+                            nbDiag2++;
+                        }
+                    }
+                }
+
         }
     }
 
