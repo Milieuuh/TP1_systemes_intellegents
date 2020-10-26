@@ -46,27 +46,30 @@ public class Echequier {
             {
                 for(int col=0;col<taille;col++)
                 {
+                    //ligne colonnes
                     if(((ligne==x)&&(echequier[ligne][col].getTypeOccupation()==0))
                             ||((col==y)&&(echequier[ligne][col].getTypeOccupation()==0)))
                     {
                         echequier[ligne][col].setTypeOccupation(2);
                     }
 
+                    //diagonale droite bas
                     if((ligne==x+nb && col==y+nb)&& echequier[ligne][col].getTypeOccupation()==0)
                     {
                         echequier[ligne][col].setTypeOccupation(2);
                         nb++;
                     }
 
+                    //diagonale gauche bas
                     if((ligne==x+nbDiag2 && col==y-nbDiag2)&& echequier[ligne][col].getTypeOccupation()==0)
                     {
                         echequier[ligne][col].setTypeOccupation(2);
                         nbDiag2++;
                     }
 
+                    //diagonale droit haut
                     if((ligne==x-nbDiag3 && col==y+nbDiag3)&& echequier[ligne][col].getTypeOccupation()==0)
                     {
-
                         echequier[ligne][col].setTypeOccupation(2);
                         nbDiag3++;
                     }
@@ -84,16 +87,12 @@ public class Echequier {
                 {
                     for(int j=y; j>=0; j--)
                     {
+                        //diagonale gauche haut
+
                         if((i==x-nb && j==y-nb)&& echequier[i][j].getTypeOccupation()==0)
                         {
                             echequier[i][j].setTypeOccupation(2);
                             nb++;
-                        }
-                        if((i==x-nbDiag2 && j==y+nbDiag2)&& echequier[i][j].getTypeOccupation()==0)
-                        {
-
-                            echequier[i][j].setTypeOccupation(2);
-                            nbDiag2++;
                         }
 
                     }
