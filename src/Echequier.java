@@ -95,6 +95,37 @@ public class Echequier {
         }
     }
 
+
+    public int calculNombreCaseMenace(int x, int y)
+    {
+
+        placerReine(x, y);
+
+        int nbCasesMenacees = 0;
+
+        for(int i=0; i<taille;i++)
+        {
+            for(int j=0; j<taille; j++)
+            {
+                if(echequier[i][j].getTypeOccupation()==2)
+                {
+                    nbCasesMenacees++;
+                    echequier[i][j].setTypeOccupation(0);
+                }
+            }
+        }
+
+        deleteReine(x,y);
+
+        return nbCasesMenacees;
+    }
+
+
+    public void deleteReine(int x, int y)
+    {
+        echequier[x][y].setTypeOccupation(0);
+    }
+
     public String toString()
     {
         String s="";

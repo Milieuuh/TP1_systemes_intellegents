@@ -6,9 +6,12 @@ public class main {
 
         System.out.println(test);
 
-        test.placerReine(4,2);
+        //test.placerReine(4,2);
 
-        System.out.println("Placement reine\n");
+        //System.out.println("Placement reine\n");
+
+        System.out.println("Placement reine en 4/2\n");
+        System.out.println("Nombre cases menacées :"+test.calculNombreCaseMenace(4,2));
 
         System.out.println(test);
     }
