@@ -13,6 +13,9 @@ public class main {
         System.out.println("Placement reine en 4/2\n");
         System.out.println("Nombre cases menacées :"+test.calculNombreCaseMenace(4,2));
 
+        System.out.println("\n-------------------------Placement DES reines---------------------");
+        test.placerReineDefitivement();
+
         System.out.println(test);
     }
 }

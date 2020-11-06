@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Echequier {
 
     //attributs
@@ -121,7 +123,54 @@ public class Echequier {
 
     public void placerReineDefitivement()
     {
+        int compteur =0;
+        ArrayList<Cellule> listeCellules = new ArrayList<>();
 
+        for(int i=0; i<taille;i++)
+        {
+            for (int j = 0; j < taille; j++)
+            {
+                if(echequier[i][j].getTypeOccupation()==0)
+                {
+                    listeCellules.add(new Cellule(i,j));
+                }
+            }
+        }
+
+        while (listeCellules.size()!=0)
+        {
+            Cellule laBest = listeCellules.get(0);
+            int nb1 = this.calculNombreCaseMenace(laBest.getX(), laBest.getY());
+            for (Cellule c : listeCellules)
+            {
+                int nb2 = this.calculNombreCaseMenace(c.getX(), c.getY());
+                if(nb2<nb1)
+                {
+                    laBest = c;
+                }
+            }
+
+            compteur++;
+            this.afficherPositionLaReine(laBest, compteur);
+            listeCellules.removeAll(listeCellules);
+            this.placerReine(laBest.getX(), laBest.getY(), 4);
+
+            for(int i=0; i<taille;i++)
+            {
+                for (int j = 0; j < taille; j++)
+                {
+                    if(echequier[i][j].getTypeOccupation()==0)
+                    {
+                        listeCellules.add(new Cellule(i,j));
+                    }
+                }
+            }
+        }
+    }
+
+    public void afficherPositionLaReine(Cellule reine, int compteur)
+    {
+        System.out.println("Reine n°"+compteur+" : x = "+reine.getX()+", y = "+reine.getY());
     }
 
     public void deleteReine(int x, int y)
@@ -144,4 +193,7 @@ public class Echequier {
 
         return s;
     }
+
+
+    
 }
