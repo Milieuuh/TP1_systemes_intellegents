@@ -9,6 +9,8 @@ public class Cellule {
     final static int LIBRE=0;
     final static int REINE=1;
     final static int MENACEE=2;
+    final static int REINEDEF=3;
+    final static int MENACEDEF=4;
 
 
     //CONSTRUCTEUR
