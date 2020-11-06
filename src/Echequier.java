@@ -119,6 +119,10 @@ public class Echequier {
         return nbCasesMenacees;
     }
 
+    public void placerReineDefitivement()
+    {
+
+    }
 
     public void deleteReine(int x, int y)
     {
