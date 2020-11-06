@@ -30,7 +30,7 @@ public class Echequier {
         echequier[x][y].setTypeOccupation(valeur);
     }
 
-    public void placerReine(int x, int y) {
+    public void placerReine(int x, int y, int typeMenace) {
         //si case libre
         if ((echequier[x][y].getTypeOccupation() == 0)) {
             //case occupée par la reine
@@ -39,24 +39,23 @@ public class Echequier {
             //MAj Menaces
             int nb = 1;
             int nbDiag2 = 1;
-            int nbDiag3 = 1;
             for (int ligne = 0; ligne < taille; ligne++) {
                 for (int col = 0; col < taille; col++) {
                     //ligne colonnes
                     if (((ligne == x) && (echequier[ligne][col].getTypeOccupation() == 0))
                             || ((col == y) && (echequier[ligne][col].getTypeOccupation() == 0))) {
-                        echequier[ligne][col].setTypeOccupation(2);
+                        echequier[ligne][col].setTypeOccupation(typeMenace);
                     }
 
                     //diagonale droite bas
                     if ((ligne == x + nb && col == y + nb) && echequier[ligne][col].getTypeOccupation() == 0) {
-                        echequier[ligne][col].setTypeOccupation(2);
+                        echequier[ligne][col].setTypeOccupation(typeMenace);
                         nb++;
                     }
 
                     //diagonale gauche bas
                     if ((ligne == x + nbDiag2 && col == y - nbDiag2) && echequier[ligne][col].getTypeOccupation() == 0) {
-                        echequier[ligne][col].setTypeOccupation(2);
+                        echequier[ligne][col].setTypeOccupation(typeMenace);
                         nbDiag2++;
                     }
 
@@ -71,7 +70,7 @@ public class Echequier {
                     for (int j = y; j >= 0; j--) {
                         //diagonale gauche haut
                         if ((i == x - nb && j == y - nb) && echequier[i][j].getTypeOccupation() == 0) {
-                            echequier[i][j].setTypeOccupation(2);
+                            echequier[i][j].setTypeOccupation(typeMenace);
                             nb++;
                         }
 
@@ -86,7 +85,7 @@ public class Echequier {
                     //diagonale droit haut
                         if ((ligne == x - nbDiag2 && col == y + nbDiag2) && echequier[ligne][col].getTypeOccupation() == 0)
                         {
-                            echequier[ligne][col].setTypeOccupation(2);
+                            echequier[ligne][col].setTypeOccupation(typeMenace);
                             nbDiag2++;
                         }
                     }
@@ -99,7 +98,7 @@ public class Echequier {
     public int calculNombreCaseMenace(int x, int y)
     {
 
-        placerReine(x, y);
+        placerReine(x, y,2);
 
         int nbCasesMenacees = 0;
 
