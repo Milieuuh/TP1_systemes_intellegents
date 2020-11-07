@@ -7,6 +7,7 @@ public class Echiquier2emeSoluce {
     private ArrayList<Integer> numColonnesSansReine;
     private ArrayList<Integer> numColonneDiagReineGauche;
     private ArrayList<Integer> numColonneDiagReineDroite;
+    private ArrayList<Integer> numLigneDiagReineDroite;
 
     //constructeur
     public Echiquier2emeSoluce(int taille)
@@ -17,6 +18,7 @@ public class Echiquier2emeSoluce {
         numColonnesSansReine=new ArrayList<>();
         numColonneDiagReineGauche=new ArrayList<>();
         numColonneDiagReineDroite=new ArrayList<>();
+        numLigneDiagReineDroite=new ArrayList<>();
 
         initialiserEchequier();
 
@@ -44,22 +46,37 @@ public class Echiquier2emeSoluce {
     public void poserReineCellule(int x,int y)
     {
         echequier[x][y].setTypeOccupation(1);
-        numColonnesSansReine.remove(y);
+
+        ArrayList<Integer> temp = new ArrayList<>();
+
+        for(int i : this.numColonnesSansReine)
+        {
+            if(i!=y)
+            {
+                temp.add(i);
+            }
+        }
+
+        numColonnesSansReine=temp;
     }
 
     public void poserReine()
     {
-        if(numColonnesSansReine.size()>=0)
+        if(numColonnesSansReine.size()!=0)
         {
             for(int ligne=0;ligne<taille;ligne++)
             {
                 for (int colonne = 0; colonne < taille; colonne++)
                 {
-                    if (numColonnesSansReine.contains(colonne))
+                    if (numColonnesSansReine.contains(colonne) )
                     {
+                        remplirDiagBasDroit(colonne);
 
-                        poserReineCellule(ligne,colonne);
-                        //remplirDiagBasDroit(colonne);
+                        if(lignePasPrise(ligne)==true  &&testDiagDroit(colonne,ligne)==false)
+                        {
+                            poserReineCellule(ligne,colonne);
+                            poserReine();
+                        }
 
                     }
                 }
@@ -75,6 +92,8 @@ public class Echiquier2emeSoluce {
     public void remplirDiagBasDroit(int colonne)
     {
         int nb =0;
+
+
         for (int ligne = 0; ligne < taille; ligne++) {
             for (int col = 0; col < taille; col++) {
 
@@ -83,17 +102,43 @@ public class Echiquier2emeSoluce {
                     if(!this.numColonneDiagReineDroite.contains(col)&&(col!=colonne))
                     {
                         this.numColonneDiagReineDroite.add(col);
+                        this.numLigneDiagReineDroite.add(ligne); //MARCHE PAS !!!!!!!!!!!!!!!!!!!
                     }
                     nb++;
                 }
             }
         }
 
-        for(int i : this.numColonneDiagReineDroite)
-        {
-            System.out.println("Num col : "+i);
-        }
     }
+
+    public boolean testDiagDroit(int colonne, int ligne)
+    {
+        boolean res=false;
+
+        if(this.numColonneDiagReineDroite.contains(colonne)&&this.numLigneDiagReineDroite.contains(ligne))
+        {
+            res=true;
+        }
+
+        return res;
+    }
+
+
+    public boolean lignePasPrise(int ligne)
+    {
+        boolean res=true;
+
+        for(int colonne=0;colonne<taille;colonne++)
+        {
+            if(echequier[ligne][colonne].getTypeOccupation()==1)
+            {
+                res=false;
+            }
+        }
+
+        return res;
+    }
+
 
 
 
