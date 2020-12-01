@@ -1,6 +1,8 @@
 import jdk.jshell.spi.ExecutionControl;
 
 import java.util.Arrays;
+import java.util.Date;
+import java.util.Random;
 
 public class Population {
 
@@ -83,6 +85,8 @@ public class Population {
         throw new ExecutionControl.NotImplementedException("Method reproduceIndividuals has not been implemented yet.");
     }
 
+
+
     @Override
     public String toString()
     {
@@ -91,4 +95,34 @@ public class Population {
                 ", genesPerPop=" + genesPerPop +
                 '}';
     }
+
+
+    //////////////////////////////////METHODES AJOUTEES
+
+
+    public Individual[] getIndividuals() {
+        return individuals;
+    }
+
+    public int calculSomme(Population pop)
+    {
+        int somme =0;
+        for(int i =0 ; i<= pop.getIndividuals().length ; i++)
+        {
+            somme = somme + pop.getIndividuals()[i].computeFitnessScore();
+        }
+
+        return somme; 
+    }
+
+    public Individual roulette( Population pop, int somme)
+    {
+        Individual solution = null;
+        Random rand = new Random();
+        int alea = rand.nextInt(somme);
+        //this.computeFitnessScore()
+
+        return null;
+    }
+
 }

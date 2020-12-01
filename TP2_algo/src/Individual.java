@@ -36,9 +36,9 @@ public class Individual {
     /**
      * Self compute the fitness score
      */
-    public void computeFitnessScore() throws ExecutionControl.NotImplementedException
+    public int computeFitnessScore()
     {
-        throw new ExecutionControl.NotImplementedException("Method computeFitnessScore has not been implemented yet.");
+        return 0;
     }
 
     /**
