@@ -33,11 +33,18 @@ public class TP2 {
 
         System.out.println(pop);
 
+        int genes[] = new int[]{1,1,1,1};
+
+        Individual i = new Individual(genes);
+
+        System.out.println(i.computeFitnessScore());
+
         for(int epoch=0; epoch<50; epoch++)
         {
-            //Population newPop = pop.generateNewPopulation();
+            Population newPop = pop.generateNewPopulation();
 
-            //pop = newPop;
+            pop = newPop;
         }
+        System.out.println(pop);
     }
 }

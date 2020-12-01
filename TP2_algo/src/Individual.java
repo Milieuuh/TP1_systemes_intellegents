@@ -38,7 +38,17 @@ public class Individual {
      */
     public int computeFitnessScore()
     {
-        return 0;
+        int res =0;
+        String s = "";
+
+        for(int i = 0; i<this.genes.length; i++)
+        {
+            s += String.valueOf(this.genes[i]);
+        }
+
+        res = Integer.parseInt(s, 2);
+
+        return res;
     }
 
     /**

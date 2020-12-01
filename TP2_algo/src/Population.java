@@ -47,20 +47,30 @@ public class Population {
      * Creates a new population using this generation's individuals
      * @return the newly generated population
      */
-    public Population generateNewPopulation() throws ExecutionControl.NotImplementedException
+    public Population generateNewPopulation() //throws ExecutionControl.NotImplementedException
     {
-        throw new ExecutionControl.NotImplementedException("Method generateNewPopulation has not been implemented yet.");
-        /*
+        //throw new ExecutionControl.NotImplementedException("Method generateNewPopulation has not been implemented yet.");
 
-        Utilisez les CROSSTYPE ici pour différencier le type de sélection
+        //Utilisez les CROSSTYPE ici pour différencier le type de sélection
 
         if(this.crosstype == Crosstype.ROULETTE)
         {
-            //ToDo generate using a ROULETTE crosstype
+            Population temp = this;
+            Individual[] listeIndividu = new Individual[temp.getIndividuals().length];
+            for (int i =0; i<temp.getIndividuals().length; i++)
+            {
+                Individual individu  = this.roulette(this);
+                listeIndividu[i] = individu;
+            }
+
+            this.setIndividuals(listeIndividu);
         }
         else{
             //ToDo generate using a TOURNOI crosstype
-        }*/
+        }
+
+        //System.out.println(this);
+        return this ;
     }
 
     /**
@@ -104,25 +114,40 @@ public class Population {
         return individuals;
     }
 
+    public void setIndividuals(Individual[] newListe) {
+        this.individuals = newListe;
+    }
+
     public int calculSomme(Population pop)
     {
         int somme =0;
-        for(int i =0 ; i<= pop.getIndividuals().length ; i++)
+        for(int i =0 ; i< pop.getIndividuals().length ; i++)
         {
             somme = somme + pop.getIndividuals()[i].computeFitnessScore();
         }
 
-        return somme; 
+        return somme;
     }
 
-    public Individual roulette( Population pop, int somme)
+    public Individual roulette( Population pop)
     {
-        Individual solution = null;
+        int somme = this.calculSomme(pop) ;
+        //System.out.println("Somme : "+somme);
+        int cumul =0;
+        int index =0;
+
         Random rand = new Random();
         int alea = rand.nextInt(somme);
-        //this.computeFitnessScore()
 
-        return null;
+        //System.out.println("Alea : "+alea);
+
+        while (cumul + pop.getIndividuals()[index].computeFitnessScore() < alea)
+        {
+            cumul += pop.getIndividuals()[index].computeFitnessScore();
+            index ++;
+        }
+
+        return pop.getIndividuals()[index];
     }
 
 }
