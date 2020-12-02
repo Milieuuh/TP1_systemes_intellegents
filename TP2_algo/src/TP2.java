@@ -25,8 +25,8 @@ public class TP2 {
     {
         int popSize = 50;
         int genesPerPop = 4;
-        Crosstype crosstype = Crosstype.ROULETTE;
-        //Crosstype crosstype = Crosstype.TOURNOI;
+        //Crosstype crosstype = Crosstype.ROULETTE;
+        Crosstype crosstype = Crosstype.TOURNOI;
         float mutationChance = 0.05f;
 
         Population pop = new Population(popSize, genesPerPop, crosstype, mutationChance);

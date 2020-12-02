@@ -17,9 +17,11 @@ public class Individual {
     {
         this.genes = new int[numberOfGenes];
         Random rand = new Random();
-        rand.setSeed(new Date().getTime());
+        //rand.setSeed(new Date().getTime());
         for(int i=0; i<numberOfGenes; i++)
+        {
             this.genes[i] = rand.nextInt(2);
+        }
         //this.computeFitnessScore()
     }
 
@@ -55,9 +57,16 @@ public class Individual {
      * Selects a bit in the genes array and flips it to either 1 or 0
      * @param geneIndex index of the gene that needs to be flipped
      */
-    public void geneFlip(int geneIndex) throws ExecutionControl.NotImplementedException
+    public void geneFlip(int geneIndex)
     {
-        throw new ExecutionControl.NotImplementedException("Method computeFitnessScore has not been implemented yet.");
+        if(this.getGenes()[geneIndex]==0)
+        {
+            this.getGenes()[geneIndex]=1;
+        }
+        else
+        {
+            this.getGenes()[geneIndex]=0;
+        }
     }
 
     public int[] getGenes()

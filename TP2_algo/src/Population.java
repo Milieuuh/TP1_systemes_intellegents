@@ -47,29 +47,57 @@ public class Population {
      * Creates a new population using this generation's individuals
      * @return the newly generated population
      */
-    public Population generateNewPopulation() //throws ExecutionControl.NotImplementedException
+    public Population generateNewPopulation()
     {
-        //throw new ExecutionControl.NotImplementedException("Method generateNewPopulation has not been implemented yet.");
-
         //Utilisez les CROSSTYPE ici pour différencier le type de sélection
+        Individual[]  listeIndividus = new Individual[this.getIndividuals().length];
 
+
+        int compteur =0;
         if(this.crosstype == Crosstype.ROULETTE)
         {
-            Population temp = this;
-            Individual[] listeIndividu = new Individual[temp.getIndividuals().length];
-            for (int i =0; i<temp.getIndividuals().length; i++)
+            for (int i =0; i<this.getIndividuals().length-1; i++)
             {
-                Individual individu  = this.roulette(this);
-                listeIndividu[i] = individu;
+                Random rand = new Random();
+                int alea = rand.nextInt(genesPerPop);
+
+               Individual premierParent = roulette(this);
+               Individual secondParent = roulette(this);
+
+              /*  System.out.println("1er parent : "+premierParent);
+                System.out.println("2eme parent : "+secondParent);*/
+
+               Individual[] enfants = this.reproduceIndividuals(premierParent, secondParent, alea);
+               listeIndividus[compteur] = enfants[0];
+               listeIndividus[compteur+1] = enfants[1];
+               compteur++;
             }
 
-            this.setIndividuals(listeIndividu);
         }
         else{
-            //ToDo generate using a TOURNOI crosstype
+            for (int i =0; i<this.getIndividuals().length-1; i++)
+            {
+                Random rand = new Random();
+                int alea = rand.nextInt(genesPerPop);
+
+                Individual premierParent = tournois(this);
+                Individual secondParent = tournois(this);
+
+                Individual[] enfants = this.reproduceIndividuals(premierParent, secondParent, alea);
+                listeIndividus[compteur] = enfants[0];
+                listeIndividus[compteur+1] = enfants[1];
+                compteur++;
+            }
+
         }
 
-        //System.out.println(this);
+        /////////////////////////////////////MUTATION
+        for(int i=0; i<this.getIndividuals().length; i++)
+        {
+            if(this.)
+        }
+
+        this.setIndividuals(listeIndividus);
         return this ;
     }
 
@@ -81,18 +109,28 @@ public class Population {
      * @return an array of 2 individuals
      */
     public Individual[] reproduceIndividuals(Individual firstParent, Individual secondParent, int crosspoint)
-            throws ExecutionControl.NotImplementedException
     {
         Individual[] offsprings = new Individual[2];
 
-//        int[] firstChildGenes = new int[genesPerPop];
-//        int[] secondChildGenes = new int[genesPerPop];
-//        ToDo compute the genes
-//        ToDo compute a possible mutation of a gene
-//        offsprings[0] = new Individual(firstChildGenes);
-//        offsprings[1] = new Individual(secondChildGenes);
+       int[] firstChildGenes = new int[genesPerPop];
+        int[] secondChildGenes = new int[genesPerPop];
 
-        throw new ExecutionControl.NotImplementedException("Method reproduceIndividuals has not been implemented yet.");
+        for (int i=0; i<crosspoint; i++)
+        {
+            firstChildGenes[i] = firstParent.getGenes()[i];
+            secondChildGenes[i] = secondParent.getGenes()[i];
+        }
+
+        for (int i=crosspoint; i<genesPerPop; i++)
+        {
+            firstChildGenes[i] = secondParent.getGenes()[i];
+            secondChildGenes[i] = firstParent.getGenes()[i];
+        }
+
+        offsprings[0] = new Individual(firstChildGenes);
+        offsprings[1] = new Individual(secondChildGenes);
+
+        return offsprings;
     }
 
 
@@ -121,7 +159,7 @@ public class Population {
     public int calculSomme(Population pop)
     {
         int somme =0;
-        for(int i =0 ; i< pop.getIndividuals().length ; i++)
+        for(int i =0 ; i<pop.getIndividuals().length-1; i++)
         {
             somme = somme + pop.getIndividuals()[i].computeFitnessScore();
         }
@@ -145,7 +183,7 @@ Si mute, prend un gene aléatoire
         Random rand = new Random();
         int alea = rand.nextInt(somme);
 
-        //System.out.println("Alea : "+alea);
+        System.out.println("Alea : "+alea);
 
         while (cumul + pop.getIndividuals()[index].computeFitnessScore() < alea)
         {
@@ -154,6 +192,39 @@ Si mute, prend un gene aléatoire
         }
 
         return pop.getIndividuals()[index];
+    }
+
+
+    //////////////////////////TOURNOIS
+    public Population melangerPop(Population pop)
+    {
+        for(int i =0 ; i<pop.getIndividuals().length; i++)
+        {
+            Random rand = new Random();
+            int alea1 = rand.nextInt(pop.getIndividuals().length-1);
+            int alea2 = rand.nextInt(pop.getIndividuals().length-1);
+
+            Individual temp = pop.getIndividuals()[alea1];
+            pop.getIndividuals()[alea1] = pop.getIndividuals()[alea2];
+            pop.getIndividuals()[alea2] = temp;
+        }
+        return pop;
+    }
+
+    public Individual tournois(Population p)
+    {
+        p = this.melangerPop(p);
+        Individual select1 = p.getIndividuals()[0];
+        Individual select2 = p.getIndividuals()[1];
+
+        Individual meilleur  = select1;
+
+        if(select2.computeFitnessScore() > select1.computeFitnessScore())
+        {
+            meilleur = select2;
+        }
+        return meilleur;
+
     }
 
 }
