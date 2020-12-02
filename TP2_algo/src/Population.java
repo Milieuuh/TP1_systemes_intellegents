@@ -129,6 +129,12 @@ public class Population {
         return somme;
     }
 
+    /*NOTES
+2 x la roulette, pour avoir deux parents puis reproduction
+Dès qu'il y a 50 enfants, tu t'arrêtes
+Puis pourcentage de chance de mutation
+Si mute, prend un gene aléatoire
+     */
     public Individual roulette( Population pop)
     {
         int somme = this.calculSomme(pop) ;
