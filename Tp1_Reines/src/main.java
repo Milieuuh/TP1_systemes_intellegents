@@ -24,7 +24,13 @@ public class main {
         test2.poserReineCellule(1,2);
 
         test2.remplirDiagBasDroit(0);*/
-        test2.PlacerReine();
+       // test2.PlacerReine();
+
+        EchiquierTheLast e = new EchiquierTheLast(8);
+
+        e.placementAutomatique(0);
+        System.out.println(e);
+
 
 
 
