@@ -94,9 +94,17 @@ public class Population {
         /////////////////////////////////////MUTATION
         for(int i=0; i<this.getIndividuals().length; i++)
         {
-            if(this.)
+            Random rand2 = new Random();
+            float alea = (float)Math.round(rand2.nextFloat()*100)/100;
+            //System.out.println("alea : "+alea +" et mutationChance "+this.mutationChance);
+            if (this.mutationChance >=alea)
+            {
+                System.out.println("MUTATION");
+                Random rand = new Random();
+                int alea2 = rand.nextInt(genesPerPop);
+                this.getIndividuals()[i].geneFlip(alea2);
+            }
         }
-
         this.setIndividuals(listeIndividus);
         return this ;
     }
